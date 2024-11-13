@@ -31,18 +31,16 @@ RegisterNUICallback('spawnAtLocation', function(data, cb)
         status = false
     })
 
-    -- Ensure we have valid coordinates
-    local spawnCoords = {
-        x = tonumber(data.coords.x),
-        y = tonumber(data.coords.y),
-        z = tonumber(data.coords.z),
-        heading = tonumber(data.coords.heading) or 0.0
-    }
-
-    print("^2[desync-spawnselect] Spawn at location: " .. json.encode(spawnCoords) .. "^7")
-    
-    -- Tell server about character selection with specific coordinates
-    TriggerServerEvent("desync-multichar:CharacterSelected", selectedCharId, spawnCoords)
+    -- Trigger spawn manager to handle the actual spawning
+    TriggerEvent("desync-spawnmanager:requestSpawn", {
+        characterId = selectedCharId,
+        coords = {
+            x = tonumber(data.coords.x),
+            y = tonumber(data.coords.y),
+            z = tonumber(data.coords.z),
+            heading = tonumber(data.coords.heading) or 0.0
+        }
+    })
     
     selectedCharId = nil
     cb({success = true})
