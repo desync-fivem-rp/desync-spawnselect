@@ -1,4 +1,4 @@
-local selectedCharId = nil
+selectedCharId = nil
 
 -- Show the spawn selection UI
 RegisterNetEvent("desync-spawnselect:ShowUI")
@@ -32,15 +32,23 @@ RegisterNUICallback('spawnAtLocation', function(data, cb)
     })
 
     -- Trigger spawn manager to handle the actual spawning
-    TriggerEvent("desync-spawnmanager:requestSpawn", {
+
+    local characterData = {
         characterId = selectedCharId,
-        coords = {
-            x = tonumber(data.coords.x),
-            y = tonumber(data.coords.y),
-            z = tonumber(data.coords.z),
-            heading = tonumber(data.coords.heading) or 0.0
-        }
-    })
+        coords = vector4(tonumber(data.coords.x), tonumber(data.coords.y), tonumber(data.coords.z), tonumber(data.coords.heading) or 0.0)
+    }
+
+    TriggerServerEvent("desync-spawnmanager:RequestSpawn", characterData)
+
+    -- TriggerEvent("desync-spawnmanager:requestSpawn", {
+    --     characterId = selectedCharId,
+    --     coords = {
+    --         x = tonumber(data.coords.x),
+    --         y = tonumber(data.coords.y),
+    --         z = tonumber(data.coords.z),
+    --         heading = tonumber(data.coords.heading) or 0.0
+    --     }
+    -- })
     
     selectedCharId = nil
     cb({success = true})
