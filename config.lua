@@ -3,7 +3,7 @@ Config = {}
 Config.SpawnPoints = {
     {
         name = "Legion Square",
-        coords = {x = 195.17, y = -933.77, z = 29.7, heading = 144.5},
+        coords = {x = 195.17, y = -933.77, z = 30.8, heading = 144.5},
         description = "The heart of Los Santos"
     },
     {

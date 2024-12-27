@@ -29,6 +29,7 @@ function SpawnSelect() {
     const handleSpawnConfirm = async () => {
         if (selectedPoint) {
             try {
+                // console.log("trying to spawn at location: " + selectedPoint.coords.x + ", " + selectedPoint.coords.y + ", " + selectedPoint.coords.z)
                 await fetchNui('spawnAtLocation', {
                     coords: {
                         x: selectedPoint.coords.x,

@@ -6,7 +6,8 @@ description 'Desync Spawn Selection'
 version '1.0.0'
 
 shared_scripts {
-    'config.lua'
+    'config.lua',
+    '@ox_lib/init.lua',
 }
 
 client_script 'client.lua'

@@ -5,7 +5,13 @@ RegisterNetEvent("desync-spawnselect:ShowUI")
 AddEventHandler("desync-spawnselect:ShowUI", function(characterId)
     selectedCharId = characterId
     SetNuiFocus(true, true)
-    TriggerServerEvent("desync-spawnselect:getSpawnPoints")
+    -- TriggerServerEvent("desync-spawnselect:getSpawnPoints")
+
+    SendNUIMessage({
+        type = 'setSpawnPoints',
+        points = Config.SpawnPoints
+    })
+
     SendNUIMessage({
         type = 'ui',
         status = true
@@ -37,6 +43,9 @@ RegisterNUICallback('spawnAtLocation', function(data, cb)
         characterId = selectedCharId,
         coords = vector4(tonumber(data.coords.x), tonumber(data.coords.y), tonumber(data.coords.z), tonumber(data.coords.heading) or 0.0)
     }
+
+    local success = lib.callback.await("desync-core:SetSelfToDefaultRoutingBucket", false)
+    -- print(success)
 
     TriggerServerEvent("desync-spawnmanager:RequestSpawn", characterData)
 
