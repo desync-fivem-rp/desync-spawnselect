@@ -5,7 +5,6 @@ RegisterNetEvent("desync-spawnselect:ShowUI")
 AddEventHandler("desync-spawnselect:ShowUI", function(characterId)
     selectedCharId = characterId
     SetNuiFocus(true, true)
-<<<<<<< HEAD
     -- TriggerServerEvent("desync-spawnselect:getSpawnPoints")
 
     SendNUIMessage({
@@ -13,9 +12,6 @@ AddEventHandler("desync-spawnselect:ShowUI", function(characterId)
         points = Config.SpawnPoints
     })
 
-=======
-    TriggerEvent("desync-spawnselect:setSpawnPoints", Config.SpawnPoints)
->>>>>>> a96a10e9b06c5f32ee77a0667deaae34049d6b16
     SendNUIMessage({
         type = 'ui',
         status = true
@@ -36,7 +32,7 @@ RegisterNUICallback('spawnAtLocation', function(data, cb)
     SetNuiFocus(false, false)
 
     -- Cleanup multichar
-    TriggerEvent("desync-multichar:cleanup")
+    -- TriggerEvent("desync-multichar:cleanup") -- don't think we need this anymore
     
     -- Hide UI first
     SendNUIMessage({
